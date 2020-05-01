@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Core.Interfaces;
 
 namespace ApiService
 {
@@ -29,7 +30,7 @@ namespace ApiService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddDbContext<AppDbContext>(options =>
                        options.UseSqlServer(_config["ConnectionStrings:DbConnectionString"]));
         }
